@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7035F93A238D120500E2CA6F /* UserFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035F939238D120500E2CA6F /* UserFetcher.swift */; };
+		7035F93C238D122200E2CA6F /* CoreDataUserFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035F93B238D122200E2CA6F /* CoreDataUserFetcher.swift */; };
 		704E3071238C863D0030CC5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704E3070238C863D0030CC5D /* AppDelegate.swift */; };
 		704E3078238C863D0030CC5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 704E3076238C863D0030CC5D /* Main.storyboard */; };
 		704E307B238C863D0030CC5D /* UIKitRandomUser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 704E3079238C863D0030CC5D /* UIKitRandomUser.xcdatamodeld */; };
@@ -47,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		629C91F9A7B16AA7F16D3CBB /* Pods_UIKitRandomUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UIKitRandomUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7035F939238D120500E2CA6F /* UserFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFetcher.swift; sourceTree = "<group>"; };
+		7035F93B238D122200E2CA6F /* CoreDataUserFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUserFetcher.swift; sourceTree = "<group>"; };
 		704E306D238C863D0030CC5D /* UIKit RUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIKit RUser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		704E3070238C863D0030CC5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		704E3077238C863D0030CC5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,7 +111,6 @@
 				E8F48694905E4B47A17B547D /* Pods-UIKitRandomUser.debug.xcconfig */,
 				8C79EA2F72CC8C93D6DABA5B /* Pods-UIKitRandomUser.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -147,6 +150,7 @@
 				704E30F4238C959B0030CC5D /* UI */,
 				704E30ED238C8EAB0030CC5D /* Utils */,
 				704E30E2238C8B2C0030CC5D /* Models */,
+				B2E9E591C2435A0C948B9E4B /* Services */,
 				704E3070238C863D0030CC5D /* AppDelegate.swift */,
 				704E3076238C863D0030CC5D /* Main.storyboard */,
 				704E307C238C863F0030CC5D /* Assets.xcassets */,
@@ -221,6 +225,15 @@
 				704E3102238CBCB80030CC5D /* UserDetailsViewController.swift */,
 			);
 			path = UserDetails;
+			sourceTree = "<group>";
+		};
+		B2E9E591C2435A0C948B9E4B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7035F939238D120500E2CA6F /* UserFetcher.swift */,
+				7035F93B238D122200E2CA6F /* CoreDataUserFetcher.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,7 +419,9 @@
 				704E30EA238C8DD00030CC5D /* DecodedUser.swift in Sources */,
 				704E30E9238C8DD00030CC5D /* UserEntity.swift in Sources */,
 				704E30F8238C95FB0030CC5D /* UserListViewController.swift in Sources */,
+				7035F93C238D122200E2CA6F /* CoreDataUserFetcher.swift in Sources */,
 				704E3103238CBCB80030CC5D /* UserDetailsViewController.swift in Sources */,
+				7035F93A238D120500E2CA6F /* UserFetcher.swift in Sources */,
 				704E3071238C863D0030CC5D /* AppDelegate.swift in Sources */,
 				704E307B238C863D0030CC5D /* UIKitRandomUser.xcdatamodeld in Sources */,
 				704E30E8238C8DD00030CC5D /* User.swift in Sources */,

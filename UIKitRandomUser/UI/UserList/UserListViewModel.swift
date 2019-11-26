@@ -7,6 +7,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+
+enum GenderFilter: Int {
+    case FemaleAndMale = 0
+    case Female = 1
+    case Male = 2
+}
 
 protocol UserListViewModelDelegate: class {
     func showUserDetails(user: User?, indexPath: IndexPath)
@@ -16,9 +24,30 @@ protocol UserListViewModelDelegate: class {
 class UserListViewModel: NSObject {
     private weak var delegate: UserListViewModelDelegate!
     
+    private let disposeBag = DisposeBag()
+    private var fetcher: UserFetcher
+    
     init(delegate: UserListViewModelDelegate) {
-        super.init()
         self.delegate = delegate
+        self.fetcher = UserFetcher()
+        super.init()
+        
+        print("call fetchUsers")
+        do {
+            try self.fetcher.fetchUsers(page: 1, count: 30, seed: UUID().uuidString)
+                .subscribe(
+                onNext: { result in
+                   print("got result")
+                },
+                onError: { error in
+                   print(error.localizedDescription)
+                },
+                onCompleted: {
+                   print("Completed event.")
+                }).disposed(by: disposeBag)
+        } catch {
+            
+        }
     }
 }
 
