@@ -17,13 +17,7 @@ enum GenderFilter: Int {
     case Male = 2
 }
 
-protocol UserListViewModelDelegate: class {
-    func showUserDetails(user: User, indexPath: IndexPath)
-}
-
-
 class UserListViewModel: NSObject {
-    private weak var delegate: UserListViewModelDelegate!
     private weak var managedObjectContext: NSManagedObjectContext!
     
     private var isLoading: Bool
@@ -35,8 +29,7 @@ class UserListViewModel: NSObject {
     private var fetcher: UserFetcher
     private var coreDataFetcher: CoreDataUserFetcher
         
-    init(delegate: UserListViewModelDelegate, moc: NSManagedObjectContext? = nil) {
-        self.delegate = delegate
+    init(moc: NSManagedObjectContext? = nil) {
         self.fetcher = UserFetcher()
         
         self.isLoading = false
@@ -53,6 +46,12 @@ class UserListViewModel: NSObject {
         self.coreDataFetcher = CoreDataUserFetcher(managedObjectContext: self.managedObjectContext)
         
         super.init()
+    }
+    
+    var frc: NSFetchedResultsController<UserEntity> {
+        get {
+            return self.coreDataFetcher.fetchedResultsController
+        }
     }
 }
 
@@ -74,13 +73,13 @@ extension UserListViewModel {
         }
     }
     
-    func setUpAndRun(frcDelegate: NSFetchedResultsControllerDelegate) {
+    func setUpAndRun(frcDelegate: NSFetchedResultsControllerDelegate, completionHandler: @escaping () -> Void) {
         self.coreDataFetcher.fetchedResultsController.delegate = frcDelegate
         self.coreDataFetcher.fetch()
-        self.fetchAndStore()
+        self.fetchAndStore(completionHandler: completionHandler)
     }
     
-    func fetchAndStore() {
+    func fetchAndStore(completionHandler: @escaping () -> Void) {
         print("call fetchAndStore")
         guard Thread.isMainThread else {
             fatalError("fetchAndStore must be called in the main thread")
@@ -107,10 +106,12 @@ extension UserListViewModel {
                     onError: { error in
                         self.isLoading = false
                         print(error.localizedDescription)
+                        completionHandler()
                     },
                     onCompleted: {
                         print("Completed event, main thread: \(Thread.isMainThread)")
                         self.isLoading = false
+                        completionHandler()
                     })
             .disposed(by: self.disposeBag)
     }
@@ -157,31 +158,3 @@ extension UserListViewModel {
 
 }
 
-extension UserListViewModel: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = self.coreDataFetcher.fetchedResultsController.sections else {
-            return 0
-        }
-        let sectionInfo = sections[section]
-        print("numberOfRowsInSection: \(sectionInfo.numberOfObjects)")
-        return sectionInfo.numberOfObjects
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.nibName) as! UserTableViewCell
-        
-        let user = self.coreDataFetcher.fetchedResultsController.object(at: indexPath)
-        cell.configure(user: user)
-        return cell
-    }
-    
-}
-
-extension UserListViewModel: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-                
-        let user = self.coreDataFetcher.fetchedResultsController.object(at: indexPath)
-        
-        self.delegate.showUserDetails(user: user, indexPath: indexPath)
-    }
-}

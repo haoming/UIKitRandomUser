@@ -17,16 +17,20 @@ class UserListViewController: UIViewController {
     @IBOutlet weak var searchInput: UITextField!
     @IBOutlet weak var magnifyingGlassImageView: UIImageView!
     
+    private var loadMoreControl: LoadMoreControl!
     private var viewModel: UserListViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel = UserListViewModel(delegate: self)
+        self.viewModel = UserListViewModel()
         
         self.tableView.register(UINib(nibName: UserTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: UserTableViewCell.nibName)
         
-        self.tableView.delegate = self.viewModel
-        self.tableView.dataSource = self.viewModel
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        self.loadMoreControl = LoadMoreControl(scrollView: tableView, spacingFromLastCell: 10, indicatorHeight: 60)
+        self.loadMoreControl.delegate = self
         
         if #available(iOS 13, *) {
             // UIImage(systemName:) is available in iOS 13 and it supports dark mode.
@@ -37,7 +41,9 @@ class UserListViewController: UIViewController {
             self.magnifyingGlassImageView.tintColor = UIColor.lightGray
         }
         
-        self.viewModel.setUpAndRun(frcDelegate: self)
+        self.viewModel.setUpAndRun(frcDelegate: self) { [weak self] in
+            self?.loadMoreControl.stop()
+        }
     }
     
 
@@ -53,46 +59,60 @@ class UserListViewController: UIViewController {
     }
 }
 
-extension UserListViewController: UserListViewModelDelegate {
-    func showUserDetails(user: User, indexPath: IndexPath) {
-        self.tableView.deselectRow(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: segueShowUserDetailsId, sender: user)
+// // MARK: - FetchedResultsController delegate
+extension UserListViewController: NSFetchedResultsControllerDelegate {
+    
+    // We don't use func controller(_ controller: didChange: at indexPath: for type: newIndexPath:)
+    // because it results in shaking animations when appending items due to unordered 'insert' operations.
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("controllerDidChangeContent")
+        self.tableView.reloadData()
     }
 }
 
-// // MARK: - FetchedResultsController delegate
-extension UserListViewController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch (type) {
-        case .insert:
-          if let indexPath = newIndexPath {
-            tableView.insertRows(at: [indexPath], with: .automatic)
-          }
-        case .delete:
-          if let indexPath = indexPath {
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-          }
-        case .update:
-          if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
-            self.viewModel.configure(cell: cell, indexPath: indexPath)
-          }
-        case .move:
-          if let indexPath = indexPath {
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-          }
-          if let newIndexPath = newIndexPath {
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
-          }
-        default:
-            break
+
+extension UserListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let sections = self.viewModel.frc.sections else {
+            return 0
         }
+        let sectionInfo = sections[section]
+        print("numberOfRowsInSection: \(sectionInfo.numberOfObjects)")
+        return sectionInfo.numberOfObjects
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.nibName) as! UserTableViewCell
+        
+        let user = self.viewModel.frc.object(at: indexPath)
+        cell.configure(user: user)
+        return cell
+    }
+    
+}
+
+extension UserListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+        let user = self.viewModel.frc.object(at: indexPath)
+        self.performSegue(withIdentifier: segueShowUserDetailsId, sender: user)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        loadMoreControl.didScroll()
     }
 }
+
+extension UserListViewController: LoadMoreControlDelegate {
+    func loadMoreControl(didStartAnimating loadMoreControl: LoadMoreControl) {
+        print("didStartAnimating")
+        self.viewModel.fetchAndStore { [weak self] in
+            self?.loadMoreControl.stop()
+        }
+    }
+
+    func loadMoreControl(didStopAnimating loadMoreControl: LoadMoreControl) {
+        print("didStopAnimating")
+    }
+}
+

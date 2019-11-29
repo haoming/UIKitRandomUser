@@ -29,6 +29,7 @@
 		704E3103238CBCB80030CC5D /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704E3102238CBCB80030CC5D /* UserDetailsViewController.swift */; };
 		70C246F2239130BB00849516 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70C246F1239130BB00849516 /* MapKit.framework */; };
 		70C246F4239136ED00849516 /* UIImageView+roundedRectShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C246F3239136ED00849516 /* UIImageView+roundedRectShadow.swift */; };
+		70C246F62391CA2200849516 /* LoadMoreControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C246F52391CA2200849516 /* LoadMoreControl.swift */; };
 		B3F92CC8CE2C5286525F74B1 /* Pods_UIKitRandomUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629C91F9A7B16AA7F16D3CBB /* Pods_UIKitRandomUser.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		704E3102238CBCB80030CC5D /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		70C246F1239130BB00849516 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		70C246F3239136ED00849516 /* UIImageView+roundedRectShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+roundedRectShadow.swift"; sourceTree = "<group>"; };
+		70C246F52391CA2200849516 /* LoadMoreControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreControl.swift; sourceTree = "<group>"; };
 		8C79EA2F72CC8C93D6DABA5B /* Pods-UIKitRandomUser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKitRandomUser.release.xcconfig"; path = "Target Support Files/Pods-UIKitRandomUser/Pods-UIKitRandomUser.release.xcconfig"; sourceTree = "<group>"; };
 		E8F48694905E4B47A17B547D /* Pods-UIKitRandomUser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKitRandomUser.debug.xcconfig"; path = "Target Support Files/Pods-UIKitRandomUser/Pods-UIKitRandomUser.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,6 +204,7 @@
 				704E30EE238C8ED80030CC5D /* DateUtils.swift */,
 				704E30F0238C8ED80030CC5D /* NationalityUtils.swift */,
 				70C246F3239136ED00849516 /* UIImageView+roundedRectShadow.swift */,
+				70C246F52391CA2200849516 /* LoadMoreControl.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				704E30F1238C8ED80030CC5D /* DateUtils.swift in Sources */,
 				704E30FD238C99760030CC5D /* UserTableViewCell.swift in Sources */,
 				704E30F3238C8ED80030CC5D /* NationalityUtils.swift in Sources */,
+				70C246F62391CA2200849516 /* LoadMoreControl.swift in Sources */,
 				704E30EA238C8DD00030CC5D /* DecodedUser.swift in Sources */,
 				704E30E9238C8DD00030CC5D /* UserEntity.swift in Sources */,
 				704E30F8238C95FB0030CC5D /* UserListViewController.swift in Sources */,
