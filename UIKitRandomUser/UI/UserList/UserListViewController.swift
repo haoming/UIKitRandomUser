@@ -10,7 +10,8 @@ import UIKit
 import CoreData
 
 class UserListViewController: UIViewController {
-
+    private let segueShowUserDetailsId = "segueShowUserDetails"
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var genderFilter: UISegmentedControl!
     @IBOutlet weak var searchInput: UITextField!
@@ -43,17 +44,20 @@ class UserListViewController: UIViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let id = segue.identifier, id == segueShowUserDetailsId,
+            let data = sender,
+            let user = data as? User,
+            let userDetailsVC = segue.destination as? UserDetailsViewController {
+            userDetailsVC.setUp(user: user)
+        }
     }
 }
 
 extension UserListViewController: UserListViewModelDelegate {
     func showUserDetails(user: User, indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: "segueShowUserDetails", sender: user)
+        self.performSegue(withIdentifier: segueShowUserDetailsId, sender: user)
     }
-        
 }
 
 // // MARK: - FetchedResultsController delegate

@@ -27,6 +27,8 @@
 		704E30FE238C99760030CC5D /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 704E30FC238C99760030CC5D /* UserTableViewCell.xib */; };
 		704E3100238CA90E0030CC5D /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704E30FF238CA90E0030CC5D /* UserListViewModel.swift */; };
 		704E3103238CBCB80030CC5D /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704E3102238CBCB80030CC5D /* UserDetailsViewController.swift */; };
+		70C246F2239130BB00849516 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70C246F1239130BB00849516 /* MapKit.framework */; };
+		70C246F4239136ED00849516 /* UIImageView+roundedRectShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C246F3239136ED00849516 /* UIImageView+roundedRectShadow.swift */; };
 		B3F92CC8CE2C5286525F74B1 /* Pods_UIKitRandomUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629C91F9A7B16AA7F16D3CBB /* Pods_UIKitRandomUser.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,8 @@
 		704E30FC238C99760030CC5D /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		704E30FF238CA90E0030CC5D /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		704E3102238CBCB80030CC5D /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
+		70C246F1239130BB00849516 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		70C246F3239136ED00849516 /* UIImageView+roundedRectShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+roundedRectShadow.swift"; sourceTree = "<group>"; };
 		8C79EA2F72CC8C93D6DABA5B /* Pods-UIKitRandomUser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKitRandomUser.release.xcconfig"; path = "Target Support Files/Pods-UIKitRandomUser/Pods-UIKitRandomUser.release.xcconfig"; sourceTree = "<group>"; };
 		E8F48694905E4B47A17B547D /* Pods-UIKitRandomUser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKitRandomUser.debug.xcconfig"; path = "Target Support Files/Pods-UIKitRandomUser/Pods-UIKitRandomUser.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -84,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70C246F2239130BB00849516 /* MapKit.framework in Frameworks */,
 				B3F92CC8CE2C5286525F74B1 /* Pods_UIKitRandomUser.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,6 +122,7 @@
 		6597A1F8B72E2EEC46732A3F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				70C246F1239130BB00849516 /* MapKit.framework */,
 				629C91F9A7B16AA7F16D3CBB /* Pods_UIKitRandomUser.framework */,
 			);
 			name = Frameworks;
@@ -195,6 +201,7 @@
 			children = (
 				704E30EE238C8ED80030CC5D /* DateUtils.swift */,
 				704E30F0238C8ED80030CC5D /* NationalityUtils.swift */,
+				70C246F3239136ED00849516 /* UIImageView+roundedRectShadow.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -423,6 +430,7 @@
 				704E3103238CBCB80030CC5D /* UserDetailsViewController.swift in Sources */,
 				7035F93A238D120500E2CA6F /* UserFetcher.swift in Sources */,
 				704E3071238C863D0030CC5D /* AppDelegate.swift in Sources */,
+				70C246F4239136ED00849516 /* UIImageView+roundedRectShadow.swift in Sources */,
 				704E307B238C863D0030CC5D /* UIKitRandomUser.xcdatamodeld in Sources */,
 				704E30E8238C8DD00030CC5D /* User.swift in Sources */,
 				704E30E7238C8DD00030CC5D /* RandomUserApiResponse.swift in Sources */,

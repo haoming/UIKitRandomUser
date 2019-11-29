@@ -23,16 +23,7 @@ class UserTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.avatarView.layer.cornerRadius = 20
-        self.avatarView.clipsToBounds = true
-
-        self.avatarContainer.layer.cornerRadius = 20
-        self.avatarContainer.layer.shadowColor = UIColor.black.cgColor
-        self.avatarContainer.layer.shadowOpacity = 0.2
-        self.avatarContainer.layer.shadowRadius = 5
-        self.avatarContainer.layer.shadowOffset = CGSize.zero
-        self.avatarContainer.layer.shadowPath = UIBezierPath(roundedRect: self.avatarContainer.bounds, cornerRadius: 20).cgPath
-        self.avatarContainer.clipsToBounds = false
+        self.avatarView.ruser_setRoundedRectShadow(cornerRadius: 20, shadowRadius: 5, containerView: self.avatarContainer)
     }
     
     func configure(user: UserEntity) {
