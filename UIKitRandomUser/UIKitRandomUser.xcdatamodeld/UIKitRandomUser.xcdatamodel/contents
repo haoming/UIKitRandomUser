@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="18G1012" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="UserEntity" representedClassName="UserEntity" syncable="YES">
+    <entity name="UserEntity" representedClassName=".UserEntity" syncable="YES">
         <attribute name="cellPhone" optional="YES" attributeType="String"/>
         <attribute name="city" optional="YES" attributeType="String"/>
         <attribute name="country" optional="YES" attributeType="String"/>
@@ -20,11 +20,12 @@
         <attribute name="registeredTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="seed" attributeType="String"/>
         <attribute name="state" optional="YES" attributeType="String"/>
+        <attribute name="streetName" optional="YES" attributeType="String"/>
         <attribute name="streetNumber" optional="YES" attributeType="String"/>
         <attribute name="thumbnailUrl" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="UserEntity" positionX="-63" positionY="-18" width="128" height="373"/>
+        <element name="UserEntity" positionX="-63" positionY="-18" width="128" height="388"/>
     </elements>
 </model>

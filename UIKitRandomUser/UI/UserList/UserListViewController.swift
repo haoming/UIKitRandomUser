@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class UserListViewController: UIViewController {
 
@@ -34,6 +35,8 @@ class UserListViewController: UIViewController {
             self.magnifyingGlassImageView.image = UIImage(named: "Search")?.withRenderingMode(.alwaysTemplate)
             self.magnifyingGlassImageView.tintColor = UIColor.lightGray
         }
+        
+        self.viewModel.setUpAndRun(frcDelegate: self)
     }
     
 
@@ -46,9 +49,46 @@ class UserListViewController: UIViewController {
 }
 
 extension UserListViewController: UserListViewModelDelegate {
-    func showUserDetails(user: User?, indexPath: IndexPath) {
+    func showUserDetails(user: User, indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
         self.performSegue(withIdentifier: "segueShowUserDetails", sender: user)
     }
         
+}
+
+// // MARK: - FetchedResultsController delegate
+extension UserListViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch (type) {
+        case .insert:
+          if let indexPath = newIndexPath {
+            tableView.insertRows(at: [indexPath], with: .automatic)
+          }
+        case .delete:
+          if let indexPath = indexPath {
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+          }
+        case .update:
+          if let indexPath = indexPath, let cell = tableView.cellForRow(at: indexPath) {
+            self.viewModel.configure(cell: cell, indexPath: indexPath)
+          }
+        case .move:
+          if let indexPath = indexPath {
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+          }
+          if let newIndexPath = newIndexPath {
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+          }
+        default:
+            break
+        }
+    }
 }

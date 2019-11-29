@@ -11,7 +11,7 @@ import CoreData
 class CoreDataUserFetcher {
     private weak var managedObjectContext: NSManagedObjectContext!
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<UserEntity> = {
+    lazy var fetchedResultsController: NSFetchedResultsController<UserEntity> = {
         let fetchRequest: NSFetchRequest<UserEntity> = UserEntity.fetchRequest() as! NSFetchRequest<UserEntity>
 
         fetchRequest.fetchBatchSize = 30
@@ -21,14 +21,14 @@ class CoreDataUserFetcher {
 
         return NSFetchedResultsController(fetchRequest: fetchRequest,
                                           managedObjectContext: self.managedObjectContext,
-                                          sectionNameKeyPath: nil, cacheName: "UserCoreDataCache")
+                                          sectionNameKeyPath: nil, cacheName: nil)
     }()
     
     init(managedObjectContext: NSManagedObjectContext) {
         self.managedObjectContext = managedObjectContext
     }
     
-    func fetch(nameSearchQuery: String = "", genderFilter: GenderFilter = .FemaleAndMale) -> [UserEntity] {
+    func fetch(nameSearchQuery: String = "", genderFilter: GenderFilter = .FemaleAndMale) {
         do {
             if nameSearchQuery == "", genderFilter == .FemaleAndMale {
                 self.fetchedResultsController.fetchRequest.predicate = nil
@@ -45,10 +45,8 @@ class CoreDataUserFetcher {
             }
             
             try self.fetchedResultsController.performFetch()
-            return self.fetchedResultsController.fetchedObjects!
         } catch {
             print("performFetch error: \(error)")
-            return []
         }
     }
 }

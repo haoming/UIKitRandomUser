@@ -17,18 +17,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="293" height="112"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="apg-s5-uLF">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="StZ-ED-w5z" userLabel="avatarContainer">
                         <rect key="frame" x="16" y="8" width="96" height="96"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="apg-s5-uLF">
+                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="96" id="GxD-RG-yWG"/>
-                            <constraint firstAttribute="width" constant="96" id="V8f-wN-Lf1"/>
+                            <constraint firstItem="apg-s5-uLF" firstAttribute="leading" secondItem="StZ-ED-w5z" secondAttribute="leading" id="BDm-zi-msw"/>
+                            <constraint firstAttribute="width" constant="96" id="MsY-DE-VOe"/>
+                            <constraint firstAttribute="bottom" secondItem="apg-s5-uLF" secondAttribute="bottom" id="Sxs-7p-CT3"/>
+                            <constraint firstAttribute="trailing" secondItem="apg-s5-uLF" secondAttribute="trailing" id="V0Z-qm-Mev"/>
+                            <constraint firstAttribute="height" constant="96" id="aSa-ma-01R"/>
+                            <constraint firstItem="apg-s5-uLF" firstAttribute="top" secondItem="StZ-ED-w5z" secondAttribute="top" id="ffk-2k-As4"/>
                         </constraints>
-                    </imageView>
+                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="P1W-dV-4af">
-                        <rect key="frame" x="120" y="12" width="173" height="88"/>
+                        <rect key="frame" x="128" y="12" width="165" height="88"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tom Hardy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgL-Hc-d1u" userLabel="Name">
-                                <rect key="frame" x="0.0" y="0.0" width="173" height="32"/>
+                                <rect key="frame" x="0.0" y="0.0" width="165" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="8xK-dj-8cf"/>
                                 </constraints>
@@ -37,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOB: 15 Sep 1977" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRK-Lq-n2e" userLabel="DOB">
-                                <rect key="frame" x="0.0" y="34.5" width="173" height="16"/>
+                                <rect key="frame" x="0.0" y="34.5" width="165" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="A3T-Y8-W4U"/>
                                 </constraints>
@@ -46,7 +56,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender: ♂️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g91-sy-fSM" userLabel="Gender">
-                                <rect key="frame" x="0.0" y="53.5" width="173" height="16"/>
+                                <rect key="frame" x="0.0" y="53.5" width="165" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="aTX-he-wCq"/>
                                 </constraints>
@@ -55,7 +65,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nationality: 🇬🇧" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYi-RG-pPb" userLabel="Nationality">
-                                <rect key="frame" x="0.0" y="72" width="173" height="16"/>
+                                <rect key="frame" x="0.0" y="72" width="165" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="Jny-qr-DxV"/>
                                 </constraints>
@@ -77,17 +87,18 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="apg-s5-uLF" secondAttribute="bottom" constant="8" id="6Zd-Yh-qcW"/>
+                    <constraint firstAttribute="bottom" secondItem="StZ-ED-w5z" secondAttribute="bottom" constant="8" id="2bl-gl-OJB"/>
+                    <constraint firstItem="P1W-dV-4af" firstAttribute="leading" secondItem="StZ-ED-w5z" secondAttribute="trailing" constant="16" id="2l7-0u-Tnv"/>
+                    <constraint firstItem="StZ-ED-w5z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Gad-Qa-odr"/>
                     <constraint firstAttribute="bottom" secondItem="P1W-dV-4af" secondAttribute="bottom" constant="12" id="Hk6-9T-DgE"/>
                     <constraint firstAttribute="trailing" secondItem="P1W-dV-4af" secondAttribute="trailing" id="bgt-c5-2I9"/>
+                    <constraint firstItem="StZ-ED-w5z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="biV-Cy-Qgj"/>
                     <constraint firstItem="P1W-dV-4af" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="cvb-PS-24k"/>
-                    <constraint firstItem="apg-s5-uLF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="oZH-XK-LAy"/>
-                    <constraint firstItem="apg-s5-uLF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="qfR-TC-Bl5"/>
-                    <constraint firstItem="P1W-dV-4af" firstAttribute="leading" secondItem="apg-s5-uLF" secondAttribute="trailing" constant="8" id="zKc-e0-mzH"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="avatarContainer" destination="StZ-ED-w5z" id="J3F-xK-QsF"/>
                 <outlet property="avatarView" destination="apg-s5-uLF" id="0Bw-gX-f69"/>
                 <outlet property="dobLabel" destination="gRK-Lq-n2e" id="wlE-bq-oOh"/>
                 <outlet property="genderLabel" destination="g91-sy-fSM" id="NOQ-25-GSt"/>
