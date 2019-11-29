@@ -102,7 +102,6 @@
                 <outlet property="avatarView" destination="apg-s5-uLF" id="0Bw-gX-f69"/>
                 <outlet property="dobLabel" destination="gRK-Lq-n2e" id="wlE-bq-oOh"/>
                 <outlet property="genderLabel" destination="g91-sy-fSM" id="NOQ-25-GSt"/>
-                <outlet property="imageView" destination="apg-s5-uLF" id="tHS-yx-Qfi"/>
                 <outlet property="nameLabel" destination="hgL-Hc-d1u" id="u5d-qx-sZG"/>
                 <outlet property="nationalityLabel" destination="tYi-RG-pPb" id="q9I-bK-aw0"/>
             </connections>
