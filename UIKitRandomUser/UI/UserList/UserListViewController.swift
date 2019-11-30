@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import RxSwift
+import RxCocoa
 
 class UserListViewController: UIViewController {
     private let segueShowUserDetailsId = "segueShowUserDetails"
@@ -22,7 +24,8 @@ class UserListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel = UserListViewModel()
+        self.viewModel = UserListViewModel(delegate: self)
+        self.setUpRxBindings()
         
         self.tableView.register(UINib(nibName: UserTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: UserTableViewCell.nibName)
         
@@ -57,6 +60,15 @@ class UserListViewController: UIViewController {
             userDetailsVC.setUp(user: user)
         }
     }
+    
+    private func setUpRxBindings() {
+        self.searchInput.rx.text.orEmpty
+            .bind(to: self.viewModel.searchQuery)
+            .disposed(by: self.viewModel.disposeBag)
+        self.genderFilter.rx.value
+            .bind(to: self.viewModel.selectedGenderOptionIndex)
+            .disposed(by: self.viewModel.disposeBag)
+    }
 }
 
 // // MARK: - FetchedResultsController delegate
@@ -70,6 +82,12 @@ extension UserListViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
+extension UserListViewController: UserListViewModelDelegate {
+    func dataRefreshed(_ viewModel: UserListViewModel, filterApplied: Bool) {
+        print("dataRefreshed, filterApplied: \(filterApplied)")
+        self.tableView.reloadData()
+    }
+}
 
 extension UserListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

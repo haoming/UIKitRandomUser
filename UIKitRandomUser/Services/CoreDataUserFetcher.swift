@@ -45,6 +45,7 @@ class CoreDataUserFetcher {
             }
             
             try self.fetchedResultsController.performFetch()
+            print("performFetch done")
         } catch {
             print("performFetch error: \(error)")
         }

@@ -17,7 +17,19 @@ enum GenderFilter: Int {
     case Male = 2
 }
 
-class UserListViewModel: NSObject {
+ protocol UserListViewModelDelegate: class {
+    func dataRefreshed(_ viewModel: UserListViewModel, filterApplied: Bool)
+ }
+
+
+class UserListViewModel {
+    
+    let disposeBag = DisposeBag()
+    let searchQuery = Variable<String>("")
+    let selectedGenderOptionIndex = Variable<Int>(GenderFilter.FemaleAndMale.rawValue)
+    let filterApplied = Variable<Bool>(false)
+    
+    private weak var delegate: UserListViewModelDelegate!
     private weak var managedObjectContext: NSManagedObjectContext!
     
     private var isLoading: Bool
@@ -25,11 +37,11 @@ class UserListViewModel: NSObject {
     private let countPerPage: Int
     private var seed: String
     
-    private let disposeBag = DisposeBag()
     private var fetcher: UserFetcher
     private var coreDataFetcher: CoreDataUserFetcher
         
-    init(moc: NSManagedObjectContext? = nil) {
+    init(moc: NSManagedObjectContext? = nil, delegate: UserListViewModelDelegate) {
+        self.delegate = delegate
         self.fetcher = UserFetcher()
         
         self.isLoading = false
@@ -44,14 +56,38 @@ class UserListViewModel: NSObject {
             self.managedObjectContext = moc
         }
         self.coreDataFetcher = CoreDataUserFetcher(managedObjectContext: self.managedObjectContext)
-        
-        super.init()
+
+        self.setUpFilterObservables()
     }
     
     var frc: NSFetchedResultsController<UserEntity> {
         get {
             return self.coreDataFetcher.fetchedResultsController
         }
+    }
+    
+    private func setUpFilterObservables() {
+        let searchObserverable = self.searchQuery.asObservable()
+        .debounce(DispatchTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
+        .distinctUntilChanged()
+        
+        let genderOptionObserverable = self.selectedGenderOptionIndex.asObservable()
+        
+        Observable.combineLatest(searchObserverable, genderOptionObserverable)
+                    .skip(1) // skip the initial empty filter
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(
+                            onNext: { [weak self] search, genderOptionIndex in
+                                print("filter next: search - \(search), gender - \(genderOptionIndex)")
+                                self?.filterUpdated(searchQuery: search, genderFilter: GenderFilter(rawValue: genderOptionIndex)!)
+                            },
+                            onError: { error in
+                                print("filter error: \(error)")
+                            },
+                            onCompleted: {
+                                print("filter complete")
+                            })
+                    .disposed(by: self.disposeBag)
     }
 }
 
@@ -156,5 +192,19 @@ extension UserListViewModel {
         }
     }
 
+    private func filterUpdated(searchQuery: String, genderFilter: GenderFilter) {
+        let nameQuery = searchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+        if nameQuery == "", genderFilter == .FemaleAndMale {
+            self.filterApplied.value = false
+        } else {
+            self.filterApplied.value = true
+        }
+        
+        print("filterUpdated - filterApplied: \(filterApplied.value), gender: \(genderFilter), search: \(nameQuery), main thread: \(Thread.isMainThread)")
+        self.coreDataFetcher.fetch(nameSearchQuery: nameQuery, genderFilter: genderFilter)
+        // the call above will not trigger call on controllerDidChangeContent(controller:)
+        // so we need to call delegate.dataRefreshed
+        self.delegate.dataRefreshed(self, filterApplied: self.filterApplied.value)
+    }
 }
 
