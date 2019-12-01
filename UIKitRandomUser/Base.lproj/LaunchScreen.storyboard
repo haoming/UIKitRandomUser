@@ -23,10 +23,10 @@
                                     <constraint firstAttribute="height" constant="90" id="QOC-rK-hQ8"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A demo app for randomuser.me supporting iOS 10+" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlU-DD-5s0">
-                                <rect key="frame" x="50" y="513" width="314" height="56"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A demo app for randomuser.me supporting iOS 10+" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DlU-DD-5s0">
+                                <rect key="frame" x="50" y="513" width="314" height="76"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="IsZ-Ls-NNR"/>
+                                    <constraint firstAttribute="height" constant="76" id="IsZ-Ls-NNR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
