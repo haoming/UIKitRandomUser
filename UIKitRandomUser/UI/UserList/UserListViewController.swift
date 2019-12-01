@@ -18,6 +18,9 @@ class UserListViewController: UIViewController {
     @IBOutlet weak var genderFilter: UISegmentedControl!
     @IBOutlet weak var searchInput: UITextField!
     @IBOutlet weak var magnifyingGlassImageView: UIImageView!
+        
+    @IBOutlet var emptyMessageView: UIView!
+    @IBOutlet weak var emptyMessageLabel: UILabel!
     
     private var loadMoreControl: LoadMoreControl!
     private var viewModel: UserListViewModel!
@@ -26,9 +29,10 @@ class UserListViewController: UIViewController {
         super.viewDidLoad()
         self.viewModel = UserListViewModel(delegate: self)
         self.setUpRxBindings()
+        self.subscribeViewModelState()
         
         self.tableView.register(UINib(nibName: UserTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: UserTableViewCell.nibName)
-        
+        self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -41,7 +45,7 @@ class UserListViewController: UIViewController {
             
         } else {
             self.magnifyingGlassImageView.image = UIImage(named: "Search")?.withRenderingMode(.alwaysTemplate)
-            self.magnifyingGlassImageView.tintColor = UIColor.lightGray
+            self.magnifyingGlassImageView.tintColor = self.genderFilter.tintColor
         }
         
         self.viewModel.setUpAndRun(frcDelegate: self) { [weak self] in
@@ -59,15 +63,6 @@ class UserListViewController: UIViewController {
             let userDetailsVC = segue.destination as? UserDetailsViewController {
             userDetailsVC.setUp(user: user)
         }
-    }
-    
-    private func setUpRxBindings() {
-        self.searchInput.rx.text.orEmpty
-            .bind(to: self.viewModel.searchQuery)
-            .disposed(by: self.viewModel.disposeBag)
-        self.genderFilter.rx.value
-            .bind(to: self.viewModel.selectedGenderOptionIndex)
-            .disposed(by: self.viewModel.disposeBag)
     }
 }
 
@@ -124,7 +119,7 @@ extension UserListViewController: UITableViewDelegate {
 extension UserListViewController: LoadMoreControlDelegate {
     func loadMoreControl(didStartAnimating loadMoreControl: LoadMoreControl) {
         print("didStartAnimating")
-        self.viewModel.fetchAndStore { [weak self] in
+        self.viewModel.fetchUsersFromBackendAndStoreResultsInCoreData { [weak self] in
             self?.loadMoreControl.stop()
         }
     }
@@ -134,3 +129,47 @@ extension UserListViewController: LoadMoreControlDelegate {
     }
 }
 
+// MARK: - Set up rx bindings and observe view model states
+extension UserListViewController {
+    
+    private func setUpRxBindings() {
+        self.searchInput.rx.text.orEmpty
+            .bind(to: self.viewModel.searchQuery)
+            .disposed(by: self.viewModel.disposeBag)
+        self.genderFilter.rx.value
+            .bind(to: self.viewModel.selectedGenderOptionIndex)
+            .disposed(by: self.viewModel.disposeBag)
+    }
+    
+    private func subscribeViewModelState() {
+        Observable.combineLatest(
+            self.viewModel.filterApplied.asObservable(),
+            self.viewModel.isDataSetEmpty.asObservable(),
+            self.viewModel.isLoading.asObservable())
+        .skip(1)
+        .observeOn(MainScheduler.instance)
+        .subscribe(
+                onNext: { [weak self] filterApplied, isDataSetEmpty, isLoading  in
+                    print("subscribeViewModelState filterApplied: \(filterApplied), isDataSetEmpty: \(isDataSetEmpty), isLoading: \(isLoading)")
+                    if isLoading {
+                        self?.tableView.backgroundView = self?.emptyMessageView
+                        self?.emptyMessageLabel.text = "Loading..."
+                        return
+                    }
+                    
+                    if isDataSetEmpty {
+                        self?.tableView.backgroundView = self?.emptyMessageView
+                                                
+                        if filterApplied {
+                            self?.emptyMessageLabel.text = "No user found.\n\nNote: the name and gender filters apply to users already loaded. Clear the filters and scroll down to load more users."
+                        } else {
+                            self?.emptyMessageLabel.text = "No user found. Please check your Internet connection."
+                        }
+                    } else {
+                        self?.tableView.backgroundView = nil
+                    }
+                    
+                })
+        .disposed(by: self.viewModel.disposeBag)
+    }
+}

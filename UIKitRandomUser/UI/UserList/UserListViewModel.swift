@@ -25,14 +25,19 @@ enum GenderFilter: Int {
 class UserListViewModel {
     
     let disposeBag = DisposeBag()
+    
+    // UI state
     let searchQuery = Variable<String>("")
     let selectedGenderOptionIndex = Variable<Int>(GenderFilter.FemaleAndMale.rawValue)
-    let filterApplied = Variable<Bool>(false)
     
+    // VM state
+    let filterApplied = Variable<Bool>(false)
+    let isDataSetEmpty = Variable<Bool>(true)
+    let isLoading = Variable<Bool>(false)
+        
     private weak var delegate: UserListViewModelDelegate!
     private weak var managedObjectContext: NSManagedObjectContext!
     
-    private var isLoading: Bool
     private var page: Int
     private let countPerPage: Int
     private var seed: String
@@ -44,7 +49,6 @@ class UserListViewModel {
         self.delegate = delegate
         self.fetcher = UserFetcher()
         
-        self.isLoading = false
         self.page = 1
         self.countPerPage = 30
         self.seed = UUID().uuidString
@@ -111,20 +115,20 @@ extension UserListViewModel {
     
     func setUpAndRun(frcDelegate: NSFetchedResultsControllerDelegate, completionHandler: @escaping () -> Void) {
         self.coreDataFetcher.fetchedResultsController.delegate = frcDelegate
-        self.coreDataFetcher.fetch()
-        self.fetchAndStore(completionHandler: completionHandler)
+        self.fetchUsersFromCoreData()
+        self.fetchUsersFromBackendAndStoreResultsInCoreData(completionHandler: completionHandler)
     }
     
-    func fetchAndStore(completionHandler: @escaping () -> Void) {
+    func fetchUsersFromBackendAndStoreResultsInCoreData(completionHandler: @escaping () -> Void) {
         print("call fetchAndStore")
         guard Thread.isMainThread else {
             fatalError("fetchAndStore must be called in the main thread")
         }
         
-        if self.isLoading {
+        if self.isLoading.value {
             return
         }
-        self.isLoading = true
+        self.isLoading.value = true
         
         self.fetcher.fetchUsers(page: self.page, count: self.countPerPage, seed: self.seed)
             .observeOn(MainScheduler.instance)
@@ -140,13 +144,13 @@ extension UserListViewModel {
                         self.page = self.page + 1
                     },
                     onError: { error in
-                        self.isLoading = false
+                        self.isLoading.value = false
                         print(error.localizedDescription)
                         completionHandler()
                     },
                     onCompleted: {
                         print("Completed event, main thread: \(Thread.isMainThread)")
-                        self.isLoading = false
+                        self.isLoading.value = false
                         completionHandler()
                     })
             .disposed(by: self.disposeBag)
@@ -201,10 +205,24 @@ extension UserListViewModel {
         }
         
         print("filterUpdated - filterApplied: \(filterApplied.value), gender: \(genderFilter), search: \(nameQuery), main thread: \(Thread.isMainThread)")
-        self.coreDataFetcher.fetch(nameSearchQuery: nameQuery, genderFilter: genderFilter)
+        self.fetchUsersFromCoreData(nameSearchQuery: nameQuery, genderFilter: genderFilter)
         // the call above will not trigger call on controllerDidChangeContent(controller:)
         // so we need to call delegate.dataRefreshed
         self.delegate.dataRefreshed(self, filterApplied: self.filterApplied.value)
+    }
+    
+    private func updateStateIsDataSetEmpty() {
+        guard let sections = self.frc.sections else {
+            self.isDataSetEmpty.value = true
+            return
+        }
+        let sectionInfo = sections[0]
+        self.isDataSetEmpty.value = sectionInfo.numberOfObjects == 0
+    }
+    
+    private func fetchUsersFromCoreData(nameSearchQuery: String = "", genderFilter: GenderFilter = .FemaleAndMale) {
+        self.coreDataFetcher.fetch(nameSearchQuery: nameSearchQuery, genderFilter: genderFilter)
+        self.updateStateIsDataSetEmpty()
     }
 }
 

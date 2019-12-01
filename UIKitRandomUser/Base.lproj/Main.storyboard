@@ -92,6 +92,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="randomuser.me" id="cgc-Hf-ow0"/>
                     <connections>
+                        <outlet property="emptyMessageLabel" destination="uHd-q1-vAF" id="Qh8-ds-Opj"/>
+                        <outlet property="emptyMessageView" destination="bHU-NG-96e" id="k5L-HK-GTi"/>
                         <outlet property="genderFilter" destination="hq9-iB-fGI" id="zjV-iB-SAw"/>
                         <outlet property="magnifyingGlassImageView" destination="iNn-cf-m2k" id="yBa-j3-OIR"/>
                         <outlet property="searchInput" destination="ai4-DU-MfI" id="Qhi-KZ-wLR"/>
@@ -100,6 +102,26 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="bHU-NG-96e" userLabel="Empty Message View">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No user found. No user found. No user found. No user found. No user found. No user found." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHd-q1-vAF" userLabel="emptyMessageLabel">
+                            <rect key="frame" x="20" y="20" width="200" height="88"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="BgC-0v-fyn" firstAttribute="bottom" secondItem="uHd-q1-vAF" secondAttribute="bottom" constant="20" id="9c5-Lz-oyv"/>
+                        <constraint firstItem="uHd-q1-vAF" firstAttribute="leading" secondItem="bHU-NG-96e" secondAttribute="leading" constant="20" id="QaU-uk-DiZ"/>
+                        <constraint firstAttribute="trailing" secondItem="uHd-q1-vAF" secondAttribute="trailing" constant="20" id="atX-y2-XSp"/>
+                        <constraint firstItem="uHd-q1-vAF" firstAttribute="top" secondItem="bHU-NG-96e" secondAttribute="top" constant="20" id="mfD-lt-OfJ"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="BgC-0v-fyn"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="132.58928571428572"/>
         </scene>
