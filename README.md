@@ -6,6 +6,6 @@ This is an iOS demo app implemented in the MVVM pattern using UIKit, RxSwift/RxC
 
 - It uses [Kingfisher](https://github.com/onevcat/Kingfisher) to load images from static URLs.
 
-[![RandomUser with UIKit + RxSwift](https://j.gifs.com/lxkXw1.gif)](https://youtu.be/7vFOgUUYRLA)
+- Click [here](https://youtu.be/7vFOgUUYRLA) to watch a screen capture video.
 
 There is a SwiftUI version of the app, available [here](https://github.com/haoming/RandomUser).
