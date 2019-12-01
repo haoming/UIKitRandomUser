@@ -79,6 +79,7 @@ extension UserListViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print("controllerDidChangeContent")
         self.tableView.reloadData()
+        self.viewModel.updateStateIsDataSetEmpty()
     }
 }
 

@@ -213,7 +213,7 @@ extension UserListViewModel {
         self.delegate.dataRefreshed(self, filterApplied: self.filterApplied.value)
     }
     
-    private func updateStateIsDataSetEmpty() {
+    func updateStateIsDataSetEmpty() {
         guard let sections = self.frc.sections else {
             self.isDataSetEmpty.value = true
             return
