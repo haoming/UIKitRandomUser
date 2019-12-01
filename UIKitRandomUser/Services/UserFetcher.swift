@@ -37,12 +37,7 @@ public class UserFetcher {
         }
 
         return self.urlSession.rx.data(request: URLRequest(url: url))
-            .map { data in
-                if let json = String(data: data, encoding: .utf8) {
-                    print("response json:")
-                    print(json)
-                }
-                
+            .map { data in                
                 let decoder = JSONDecoder()
                 do {
                     let result = try decoder.decode(T.self, from: data)

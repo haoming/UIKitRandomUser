@@ -119,6 +119,11 @@ extension UserListViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         loadMoreControl.didScroll()
     }
+    
+    // added estimatedHeightForRowAt to avoid jumping in iOS 13 when reloading data
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 112
+    }
 }
 
 extension UserListViewController: LoadMoreControlDelegate {

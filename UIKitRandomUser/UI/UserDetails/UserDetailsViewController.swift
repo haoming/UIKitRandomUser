@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import Kingfisher
+import MapKit
 
 class UserDetailsViewController: UITableViewController {
     
@@ -54,10 +55,21 @@ class UserDetailsViewController: UITableViewController {
         }
         self.emailLabel.text = user.email ?? "unknown"
         self.addressLabel.text = user.address ?? "unkown"
+        
+        if let coordinate = self.user.coordinate {
+            let span = MKCoordinateSpan(latitudeDelta: 45.0, longitudeDelta: 45.0)
+            let region = MKCoordinateRegion(center: coordinate, span: span)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            mapView.addAnnotation(annotation)
+            mapView.setRegion(region, animated: true)
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        // we cannot set up the shadow in viewDidLoad, because the view bound is not the actual size.
         self.photoView.ruser_setRoundedRectShadow(cornerRadius: 20, shadowRadius: 5, containerView: self.photoContainer)
     }
 

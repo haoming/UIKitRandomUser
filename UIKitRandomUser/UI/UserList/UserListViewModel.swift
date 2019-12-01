@@ -27,6 +27,7 @@ class UserListViewModel {
     let disposeBag = DisposeBag()
     
     // UI state
+    // The decpreated Variable is used here, because the doc says that 'offical migration path hasn't been decided yet'.
     let searchQuery = Variable<String>("")
     let selectedGenderOptionIndex = Variable<Int>(GenderFilter.FemaleAndMale.rawValue)
     
