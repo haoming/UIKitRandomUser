@@ -21,18 +21,15 @@ class UserListViewController: UIViewController {
         
     @IBOutlet var emptyMessageView: UIView!
     @IBOutlet weak var emptyMessageLabel: UILabel!
+    @IBOutlet var filterAppliedFooter: UIView!
     
     private var loadMoreControl: LoadMoreControl!
     private var viewModel: UserListViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel = UserListViewModel(delegate: self)
-        self.setUpRxBindings()
-        self.subscribeViewModelState()
-        
+                
         self.tableView.register(UINib(nibName: UserTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: UserTableViewCell.nibName)
-        self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -48,6 +45,9 @@ class UserListViewController: UIViewController {
             self.magnifyingGlassImageView.tintColor = self.genderFilter.tintColor
         }
         
+        self.viewModel = UserListViewModel(delegate: self)
+        self.setUpRxBindings()
+        self.subscribeViewModelState()
         self.viewModel.setUpAndRun(frcDelegate: self) { [weak self] in
             self?.loadMoreControl.stop()
         }
@@ -151,15 +151,17 @@ extension UserListViewController {
         .subscribe(
                 onNext: { [weak self] filterApplied, isDataSetEmpty, isLoading  in
                     print("subscribeViewModelState filterApplied: \(filterApplied), isDataSetEmpty: \(isDataSetEmpty), isLoading: \(isLoading)")
-                    if isLoading {
-                        self?.tableView.backgroundView = self?.emptyMessageView
-                        self?.emptyMessageLabel.text = "Loading..."
-                        return
-                    }
-                    
+                                        
                     if isDataSetEmpty {
+                        self?.loadMoreControl.enabled = false
                         self?.tableView.backgroundView = self?.emptyMessageView
-                                                
+                        self?.tableView.tableFooterView = UIView()
+                        
+                        if isLoading {
+                            self?.emptyMessageLabel.text = "Loading..."
+                            return
+                        }
+                        
                         if filterApplied {
                             self?.emptyMessageLabel.text = "No user found.\n\nNote: the name and gender filters apply to users already loaded. Clear the filters and scroll down to load more users."
                         } else {
@@ -167,8 +169,15 @@ extension UserListViewController {
                         }
                     } else {
                         self?.tableView.backgroundView = nil
+                        
+                        if filterApplied {
+                            self?.loadMoreControl.enabled = false
+                            self?.tableView.tableFooterView = self?.filterAppliedFooter
+                        } else {
+                            self?.loadMoreControl.enabled = true
+                            self?.tableView.tableFooterView = UIView()
+                        }
                     }
-                    
                 })
         .disposed(by: self.viewModel.disposeBag)
     }

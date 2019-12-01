@@ -94,6 +94,7 @@
                     <connections>
                         <outlet property="emptyMessageLabel" destination="uHd-q1-vAF" id="Qh8-ds-Opj"/>
                         <outlet property="emptyMessageView" destination="bHU-NG-96e" id="k5L-HK-GTi"/>
+                        <outlet property="filterAppliedFooter" destination="xwy-oC-nWl" id="Uf3-Hv-e6j"/>
                         <outlet property="genderFilter" destination="hq9-iB-fGI" id="zjV-iB-SAw"/>
                         <outlet property="magnifyingGlassImageView" destination="iNn-cf-m2k" id="yBa-j3-OIR"/>
                         <outlet property="searchInput" destination="ai4-DU-MfI" id="Qhi-KZ-wLR"/>
@@ -121,6 +122,26 @@
                         <constraint firstItem="uHd-q1-vAF" firstAttribute="top" secondItem="bHU-NG-96e" secondAttribute="top" constant="20" id="mfD-lt-OfJ"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="BgC-0v-fyn"/>
+                </view>
+                <view contentMode="scaleToFill" id="xwy-oC-nWl" userLabel="Filter applied footer">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filter applied to loaded users only." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1g-y5-USL">
+                            <rect key="frame" x="20" y="0.0" width="200" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="J1g-y5-USL" firstAttribute="top" secondItem="xwy-oC-nWl" secondAttribute="top" id="5MN-Ts-Hhy"/>
+                        <constraint firstItem="0Z3-XD-ald" firstAttribute="bottom" secondItem="J1g-y5-USL" secondAttribute="bottom" id="W7x-Rz-WbY"/>
+                        <constraint firstItem="J1g-y5-USL" firstAttribute="leading" secondItem="0Z3-XD-ald" secondAttribute="leading" constant="20" id="qDi-M9-4MX"/>
+                        <constraint firstItem="0Z3-XD-ald" firstAttribute="trailing" secondItem="J1g-y5-USL" secondAttribute="trailing" constant="20" id="ta3-EC-xtm"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="0Z3-XD-ald"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="1050.7246376811595" y="132.58928571428572"/>

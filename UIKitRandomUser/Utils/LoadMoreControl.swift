@@ -20,13 +20,17 @@ class LoadMoreControl {
     private weak var activityIndicatorView: UIActivityIndicatorView?
     private weak var scrollView: UIScrollView?
     weak var delegate: LoadMoreControlDelegate?
+    
+    var enabled = true
 
     private var defaultY: CGFloat {
-        guard let height = scrollView?.contentSize.height else { return 0.0 }
+        guard let height = scrollView?.contentSize.height else {
+            return 0.0
+        }
         return height + spacingFromLastCell
     }
 
-    init (scrollView: UIScrollView, spacingFromLastCell: CGFloat, indicatorHeight: CGFloat) {
+    init(scrollView: UIScrollView, spacingFromLastCell: CGFloat, indicatorHeight: CGFloat) {
         self.scrollView = scrollView
         self.spacingFromLastCell = spacingFromLastCell
         self.indicatorHeight = indicatorHeight
@@ -48,6 +52,9 @@ class LoadMoreControl {
     }
 
     func didScroll() {
+        guard self.enabled else {
+            return
+        }
         guard let scrollView = scrollView, let activityIndicatorView = activityIndicatorView else { return }
         let offsetY = scrollView.contentOffset.y
         activityIndicatorView.isHidden = isHidden
