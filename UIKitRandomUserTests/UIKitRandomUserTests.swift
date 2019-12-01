@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import UIKitRandomUser
+@testable import UIKit_RUser
 
 class UIKitRandomUserTests: XCTestCase {
 

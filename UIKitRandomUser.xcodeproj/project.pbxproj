@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16FE48E746CD7D7B2A11D867 /* Pods_UIKitRandomUserTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 672DEC5C0D03C00028DAA29D /* Pods_UIKitRandomUserTests.framework */; };
 		7035F93A238D120500E2CA6F /* UserFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035F939238D120500E2CA6F /* UserFetcher.swift */; };
 		7035F93C238D122200E2CA6F /* CoreDataUserFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035F93B238D122200E2CA6F /* CoreDataUserFetcher.swift */; };
 		704E3071238C863D0030CC5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704E3070238C863D0030CC5D /* AppDelegate.swift */; };
@@ -30,6 +31,7 @@
 		70C246F2239130BB00849516 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70C246F1239130BB00849516 /* MapKit.framework */; };
 		70C246F4239136ED00849516 /* UIImageView+roundedRectShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C246F3239136ED00849516 /* UIImageView+roundedRectShadow.swift */; };
 		70C246F62391CA2200849516 /* LoadMoreControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C246F52391CA2200849516 /* LoadMoreControl.swift */; };
+		70C2470923937EB900849516 /* UserFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C2470723937EB900849516 /* UserFetcherTests.swift */; };
 		B3F92CC8CE2C5286525F74B1 /* Pods_UIKitRandomUser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 629C91F9A7B16AA7F16D3CBB /* Pods_UIKitRandomUser.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +53,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		288D11F5898F0D27FB042395 /* Pods-UIKitRandomUser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKitRandomUser.debug.xcconfig"; path = "Target Support Files/Pods-UIKitRandomUser/Pods-UIKitRandomUser.debug.xcconfig"; sourceTree = "<group>"; };
+		5D27DFD03314F48B6F838D5E /* Pods-UIKitRandomUserTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKitRandomUserTests.debug.xcconfig"; path = "Target Support Files/Pods-UIKitRandomUserTests/Pods-UIKitRandomUserTests.debug.xcconfig"; sourceTree = "<group>"; };
 		629C91F9A7B16AA7F16D3CBB /* Pods_UIKitRandomUser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UIKitRandomUser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		672DEC5C0D03C00028DAA29D /* Pods_UIKitRandomUserTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UIKitRandomUserTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7035F939238D120500E2CA6F /* UserFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFetcher.swift; sourceTree = "<group>"; };
 		7035F93B238D122200E2CA6F /* CoreDataUserFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUserFetcher.swift; sourceTree = "<group>"; };
 		704E306D238C863D0030CC5D /* UIKit RUser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIKit RUser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,8 +86,9 @@
 		70C246F1239130BB00849516 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		70C246F3239136ED00849516 /* UIImageView+roundedRectShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+roundedRectShadow.swift"; sourceTree = "<group>"; };
 		70C246F52391CA2200849516 /* LoadMoreControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreControl.swift; sourceTree = "<group>"; };
-		8C79EA2F72CC8C93D6DABA5B /* Pods-UIKitRandomUser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKitRandomUser.release.xcconfig"; path = "Target Support Files/Pods-UIKitRandomUser/Pods-UIKitRandomUser.release.xcconfig"; sourceTree = "<group>"; };
-		E8F48694905E4B47A17B547D /* Pods-UIKitRandomUser.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKitRandomUser.debug.xcconfig"; path = "Target Support Files/Pods-UIKitRandomUser/Pods-UIKitRandomUser.debug.xcconfig"; sourceTree = "<group>"; };
+		70C2470723937EB900849516 /* UserFetcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFetcherTests.swift; sourceTree = "<group>"; };
+		7C07010B9D70D47E4C28C402 /* Pods-UIKitRandomUserTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKitRandomUserTests.release.xcconfig"; path = "Target Support Files/Pods-UIKitRandomUserTests/Pods-UIKitRandomUserTests.release.xcconfig"; sourceTree = "<group>"; };
+		B0527CA3BA427571E5F66CAE /* Pods-UIKitRandomUser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKitRandomUser.release.xcconfig"; path = "Target Support Files/Pods-UIKitRandomUser/Pods-UIKitRandomUser.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16FE48E746CD7D7B2A11D867 /* Pods_UIKitRandomUserTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,8 +122,10 @@
 		20C2BFF67AF91F9DCF038744 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E8F48694905E4B47A17B547D /* Pods-UIKitRandomUser.debug.xcconfig */,
-				8C79EA2F72CC8C93D6DABA5B /* Pods-UIKitRandomUser.release.xcconfig */,
+				288D11F5898F0D27FB042395 /* Pods-UIKitRandomUser.debug.xcconfig */,
+				B0527CA3BA427571E5F66CAE /* Pods-UIKitRandomUser.release.xcconfig */,
+				5D27DFD03314F48B6F838D5E /* Pods-UIKitRandomUserTests.debug.xcconfig */,
+				7C07010B9D70D47E4C28C402 /* Pods-UIKitRandomUserTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -126,6 +135,7 @@
 			children = (
 				70C246F1239130BB00849516 /* MapKit.framework */,
 				629C91F9A7B16AA7F16D3CBB /* Pods_UIKitRandomUser.framework */,
+				672DEC5C0D03C00028DAA29D /* Pods_UIKitRandomUserTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -172,6 +182,7 @@
 		704E3089238C863F0030CC5D /* UIKitRandomUserTests */ = {
 			isa = PBXGroup;
 			children = (
+				70C2470723937EB900849516 /* UserFetcherTests.swift */,
 				704E308A238C863F0030CC5D /* UIKitRandomUserTests.swift */,
 				704E308C238C863F0030CC5D /* Info.plist */,
 			);
@@ -272,9 +283,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 704E309D238C863F0030CC5D /* Build configuration list for PBXNativeTarget "UIKitRandomUserTests" */;
 			buildPhases = (
+				53D431447516F03EBEFF2AFD /* [CP] Check Pods Manifest.lock */,
 				704E3082238C863F0030CC5D /* Sources */,
 				704E3083238C863F0030CC5D /* Frameworks */,
 				704E3084238C863F0030CC5D /* Resources */,
+				46F0899D63AB4BE205FF57C0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -393,6 +406,45 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UIKitRandomUser/Pods-UIKitRandomUser-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		46F0899D63AB4BE205FF57C0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UIKitRandomUserTests/Pods-UIKitRandomUserTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-UIKitRandomUserTests/Pods-UIKitRandomUserTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-UIKitRandomUserTests/Pods-UIKitRandomUserTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53D431447516F03EBEFF2AFD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UIKitRandomUserTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B8D6A6E7F6A968E5523B7303 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -445,6 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70C2470923937EB900849516 /* UserFetcherTests.swift in Sources */,
 				704E308B238C863F0030CC5D /* UIKitRandomUserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -542,7 +595,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -596,7 +649,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -608,7 +661,7 @@
 		};
 		704E309B238C863F0030CC5D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8F48694905E4B47A17B547D /* Pods-UIKitRandomUser.debug.xcconfig */;
+			baseConfigurationReference = 288D11F5898F0D27FB042395 /* Pods-UIKitRandomUser.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -628,7 +681,7 @@
 		};
 		704E309C238C863F0030CC5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C79EA2F72CC8C93D6DABA5B /* Pods-UIKitRandomUser.release.xcconfig */;
+			baseConfigurationReference = B0527CA3BA427571E5F66CAE /* Pods-UIKitRandomUser.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -648,6 +701,7 @@
 		};
 		704E309E238C863F0030CC5D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D27DFD03314F48B6F838D5E /* Pods-UIKitRandomUserTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -664,12 +718,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UIKitRandomUser.app/UIKitRandomUser";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UIKit RUser.app/UIKit RUser";
 			};
 			name = Debug;
 		};
 		704E309F238C863F0030CC5D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C07010B9D70D47E4C28C402 /* Pods-UIKitRandomUserTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -686,7 +741,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UIKitRandomUser.app/UIKitRandomUser";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UIKit RUser.app/UIKit RUser";
 			};
 			name = Release;
 		};

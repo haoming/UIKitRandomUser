@@ -71,7 +71,7 @@ class UserListViewController: UIViewController {
     }
 }
 
-// // MARK: - FetchedResultsController delegate
+// MARK: - FetchedResultsController delegate
 extension UserListViewController: NSFetchedResultsControllerDelegate {
     
     // We don't use func controller(_ controller: didChange: at indexPath: for type: newIndexPath:)
@@ -82,6 +82,7 @@ extension UserListViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
+// MARK: - table view and view model delegates
 extension UserListViewController: UserListViewModelDelegate {
     func dataRefreshed(_ viewModel: UserListViewModel, filterApplied: Bool) {
         print("dataRefreshed, filterApplied: \(filterApplied)")

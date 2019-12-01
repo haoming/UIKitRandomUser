@@ -1,0 +1,6 @@
+framework module Pods_UIKitRandomUserTests {
+  umbrella header "Pods-UIKitRandomUserTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
