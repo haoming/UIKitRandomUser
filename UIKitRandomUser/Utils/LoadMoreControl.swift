@@ -38,7 +38,6 @@ class LoadMoreControl {
         let size:CGFloat = 40
         let frame = CGRect(x: (scrollView.frame.width-size)/2, y: scrollView.contentSize.height + spacingFromLastCell, width: size, height: size)
         let activityIndicatorView = UIActivityIndicatorView(frame: frame)
-        activityIndicatorView.color = .black
         activityIndicatorView.hidesWhenStopped = true
         activityIndicatorView.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
         scrollView.addSubview(activityIndicatorView)

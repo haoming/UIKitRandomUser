@@ -15,6 +15,7 @@ class UserListViewController: UIViewController {
     private let segueShowUserDetailsId = "segueShowUserDetails"
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var genderFilter: UISegmentedControl!
     @IBOutlet weak var searchInput: UITextField!
     @IBOutlet weak var magnifyingGlassImageView: UIImageView!
@@ -53,8 +54,12 @@ class UserListViewController: UIViewController {
         }
     }
     
-
-    
+    @IBAction func onRefreshTapped(_ sender: UIBarButtonItem) {
+        self.searchInput.text = ""
+        self.genderFilter.selectedSegmentIndex = GenderFilter.FemaleAndMale.rawValue
+        self.viewModel.refreshRandomUsers()
+    }
+        
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let id = segue.identifier, id == segueShowUserDetailsId,
@@ -139,6 +144,17 @@ extension UserListViewController {
         self.genderFilter.rx.value
             .bind(to: self.viewModel.selectedGenderOptionIndex)
             .disposed(by: self.viewModel.disposeBag)
+        
+        let notLoading = self.viewModel.isLoading.asObservable().map{!$0}
+        
+        notLoading.bind(to: self.searchInput.rx.isEnabled)
+            .disposed(by: self.viewModel.disposeBag)
+        
+        notLoading.bind(to: self.genderFilter.rx.isEnabled)
+            .disposed(by: self.viewModel.disposeBag)
+        
+        notLoading.bind(to: self.refreshButton.rx.isEnabled)
+        .disposed(by: self.viewModel.disposeBag)
     }
     
     private func subscribeViewModelState() {

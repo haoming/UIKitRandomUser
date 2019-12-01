@@ -43,7 +43,7 @@
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ai4-DU-MfI">
                                             <rect key="frame" x="52" y="58.5" width="346" height="22"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                         </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eV-BD-2pM" userLabel="separator">
                                             <rect key="frame" x="16" y="95.5" width="398" height="0.5"/>
@@ -90,13 +90,20 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="randomuser.me" id="cgc-Hf-ow0"/>
+                    <navigationItem key="navigationItem" title="randomuser.me" id="cgc-Hf-ow0">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="Y3u-Z4-hlh">
+                            <connections>
+                                <action selector="onRefreshTapped:" destination="BYZ-38-t0r" id="UCB-mY-hg3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emptyMessageLabel" destination="uHd-q1-vAF" id="Qh8-ds-Opj"/>
                         <outlet property="emptyMessageView" destination="bHU-NG-96e" id="k5L-HK-GTi"/>
                         <outlet property="filterAppliedFooter" destination="xwy-oC-nWl" id="Uf3-Hv-e6j"/>
                         <outlet property="genderFilter" destination="hq9-iB-fGI" id="zjV-iB-SAw"/>
                         <outlet property="magnifyingGlassImageView" destination="iNn-cf-m2k" id="yBa-j3-OIR"/>
+                        <outlet property="refreshButton" destination="Y3u-Z4-hlh" id="x8V-KF-xdq"/>
                         <outlet property="searchInput" destination="ai4-DU-MfI" id="Qhi-KZ-wLR"/>
                         <outlet property="tableView" destination="Azt-VN-zAU" id="wcx-0p-zBH"/>
                         <segue destination="Snz-aS-Ci6" kind="show" identifier="segueShowUserDetails" id="geV-0o-zFJ"/>

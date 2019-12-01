@@ -96,16 +96,17 @@ class UserListViewModel {
 }
 
 extension UserListViewModel {
-//    func refreshRandomUsers() {
-//        guard !self.isLoading else {
-//            return
-//        }
-//        self.searchQuery = ""
-//        self.selectedGenderOptionIndex = GenderFilter.FemaleAndMale.rawValue
-//        self.seed = UUID().uuidString
-//        self.page = 1
-//        self.fetchAndStore()
-//    }
+    func refreshRandomUsers() {
+        guard !self.isLoading.value else {
+            return
+        }
+        self.searchQuery.value = ""
+        self.selectedGenderOptionIndex.value = GenderFilter.FemaleAndMale.rawValue
+        self.seed = UUID().uuidString
+        self.page = 1
+        self.fetchUsersFromBackendAndStoreResultsInCoreData {
+        }
+    }
     
     func configure(cell: UITableViewCell, indexPath: IndexPath) {
         if let cell = cell as? UserTableViewCell {
