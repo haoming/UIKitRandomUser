@@ -46,7 +46,7 @@ class LoadMoreControl {
         }
         activityIndicatorView.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin]
         scrollView.addSubview(activityIndicatorView)
-        activityIndicatorView.isHidden = isHidden
+        activityIndicatorView.isHidden = true
         self.activityIndicatorView = activityIndicatorView
     }
 
@@ -81,33 +81,11 @@ class LoadMoreControl {
                     delegate?.loadMoreControl(didStartAnimating: self)
                 }
             }
-
-            if scrollView.isDecelerating {
-                if activityIndicatorView.isAnimating && scrollView.contentInset.bottom == 0 {
-                    UIView.animate(withDuration: 0.3) { [weak self, weak scrollView] in
-                        if let bottom = self?.indicatorHeight {
-                            scrollView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: bottom, right: 0)
-                        }
-                    }
-                }
-            }
         }
     }
 
     func stop() {
-        guard let scrollView = scrollView else { return }
-        let contentDelta = scrollView.contentSize.height - scrollView.frame.size.height
-        let offsetDelta = scrollView.contentOffset.y - contentDelta
-        if offsetDelta >= 0 {
-            UIView.animate(withDuration: 0.3, animations: { [weak scrollView] in
-                scrollView?.contentInset = .zero
-            }) { [weak self] result in
-                if result { self?.endAnimating() }
-            }
-        } else {
-            scrollView.contentInset = .zero
-            endAnimating()
-        }
+        endAnimating()
     }
 
     private func endAnimating() {
